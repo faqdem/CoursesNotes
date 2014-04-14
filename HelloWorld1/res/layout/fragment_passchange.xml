@@ -5,36 +5,30 @@
     android:orientation="vertical" >
 	
     
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="?android:attr/textAppearanceMedium"
-        android:layout_marginBottom="@dimen/item_vertical_margin"
-        android:text="@string/label_registration" />
 
     <EditText
-        android:id="@+id/registration_login"
+        android:id="@+id/passchange_oldpass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/item_vertical_margin"
-        android:hint="@string/hint_login" />
+        android:hint="@string/hint_oldpassword" />
     
     <EditText
-        android:id="@+id/registration_pass"
+        android:id="@+id/passchange_newpass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/item_vertical_margin"
-        android:hint="@string/hint_password" />
+        android:hint="@string/hint_newpassword" />
     
     <EditText
-        android:id="@+id/registration_passrep"
+        android:id="@+id/passchange_newpassrep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/item_vertical_margin"
         android:hint="@string/hint_passwordrep" />
     
     <Button 
-        android:id="@+id/registration_button"
+        android:id="@+id/passchange_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_registration"

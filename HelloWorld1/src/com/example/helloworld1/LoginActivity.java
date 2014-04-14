@@ -63,7 +63,7 @@ public class LoginActivity extends Activity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
-			Button button1 = (Button) rootView.findViewById(R.id.button1);
+			Button button1 = (Button) rootView.findViewById(R.id.login_button);
 			button1.setOnClickListener(new OnClickListener() {
 				
 				@Override
@@ -86,13 +86,13 @@ public class LoginActivity extends Activity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_registration, container,
 					false);
-			Button button1 = (Button) rootView.findViewById(R.id.button1);
+			Button button1 = (Button) rootView.findViewById(R.id.registration_button);
 			button1.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					Log.i("But1","Hello button");
+					Log.i("But2","Hello button");
 					startActivity(new Intent(getActivity(), NotesActivity.class));
 				}
 			});
