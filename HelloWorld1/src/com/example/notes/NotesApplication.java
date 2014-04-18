@@ -1,4 +1,4 @@
-package com.example.helloworld1;
+package com.example.notes;
 
 import android.app.Application;
 

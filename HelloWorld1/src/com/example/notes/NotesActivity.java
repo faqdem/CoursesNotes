@@ -1,4 +1,6 @@
-package com.example.helloworld1;
+package com.example.notes;
+
+import com.example.helloworld1.R;
 
 import android.app.Activity;
 import android.app.ActionBar;

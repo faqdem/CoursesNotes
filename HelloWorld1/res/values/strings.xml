@@ -19,7 +19,7 @@
     <string name="button_changepass">Change password</string>
     <string name="hint_noteheader">Note header</string>
     <string name="hint_notetext">Note text</string>
-    
-    
+    <string name="tab_login">Login</string>
+    <string name="tab_registration">Registration</string>
 
 </resources>
