@@ -1,28 +1,21 @@
 package com.example.notes;
 
-import com.example.helloworld1.R;
-import com.example.notes.Singleton.LoginException;
-
+import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import android.os.Build;
+import com.example.helloworld1.R;
+import com.example.notes.Singleton.LoginException;
 
 public class LoginActivity extends Activity implements TabListener {
 
@@ -150,11 +143,34 @@ public class LoginActivity extends Activity implements TabListener {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					Log.i("But2","Hello button");
-					startActivity(new Intent(getActivity(), NotesActivity.class));
-				}
+					//startActivity(new Intent(getActivity(), NotesActivity.class));
+                    String login = ((EditText)(getView().findViewById(R.id.registration_login))).getText().toString();
+                    String password = ((EditText)(getView().findViewById(R.id.registration_pass))).getText().toString();
+                    String passwordRep = ((EditText)(getView().findViewById(R.id.registration_passrep))).getText().toString();
+                    if (password.equals(passwordRep))
+                    {
+                        Log.i("But2","Shit1");
+
+                        try {
+                            Singleton.getInstance().register(login, password);
+                        } catch (Singleton.RegistrationException e) {
+                            Toast.makeText(getActivity(), e.getResult().toString(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Log.i("But2","Shit2");
+
+                        Toast.makeText(getActivity(), "Passwords doesn't match!", Toast.LENGTH_SHORT).show();
+                    }
+                    Toast.makeText(getActivity(), "Registration success", Toast.LENGTH_SHORT).show();
+                }
+
 			});
 			return rootView;
 		}
 	}
+
 
 }
