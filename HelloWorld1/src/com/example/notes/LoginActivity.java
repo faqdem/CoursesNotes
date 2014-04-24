@@ -24,19 +24,40 @@ public class LoginActivity extends Activity implements TabListener {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+    Fragment[] fragments = {
+      new LoginFragment(),
+      new RegistrationFragment()
+    };
+
+    public void switchToLoginWithName(String login)
+    {
+        ((LoginFragment)(fragments[0])).setLogin(login);
+        ActionBar bar = getActionBar();
+        bar.setSelectedNavigationItem(0);
+
+    }
+
+
+
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		
-		switch (tab.getPosition())
-		{
-			case 0:
-				ft.replace(R.id.container, new LoginFragment() );
-				break;
-			case 1:
-				ft.replace(R.id.container, new RegistrationFragment() );
-				break;
-		}
+        Log.i("A", "Hello Tab" + tab.getPosition());
+        for(int i=0; i<fragments.length; ++i) {
+            final Fragment f = fragments[i];
+            if(i == tab.getPosition()) {
+                if(!f.isAdded()) {
+                    ft.add(R.id.container, f);
+                }
+                if(f.isDetached()) {
+                    ft.attach(f);
+                }
+            } else {
+                if(!f.isDetached()) {
+                    ft.detach(f);
+                }
+            }
+        }
 	}
 	
 	@Override
@@ -95,6 +116,31 @@ public class LoginActivity extends Activity implements TabListener {
 	 * A placeholder fragment containing a simple view.
 	 */
 	public static class LoginFragment extends Fragment {
+
+        public String login;
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            Log.i("onResume", "Resume!");
+            if (login != null)
+            {
+                ((EditText)(this.getView().findViewById(R.id.login_login))).setText(login);
+                ((EditText)(this.getView().findViewById(R.id.login_password))).setText("");
+                login = null;
+            }
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            Log.i("onStart", "Start!");
+        }
+
+        public void setLogin(String login)
+        {
+            this.login = login;
+        }
 
 		public LoginFragment() {
 		}
@@ -165,6 +211,11 @@ public class LoginActivity extends Activity implements TabListener {
                         Toast.makeText(getActivity(), "Passwords doesn't match!", Toast.LENGTH_SHORT).show();
                     }
                     Toast.makeText(getActivity(), "Registration success", Toast.LENGTH_SHORT).show();
+
+
+                    ((LoginActivity)getActivity()).switchToLoginWithName(login);
+
+
                 }
 
 			});

@@ -3,8 +3,6 @@ package com.example.notes;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.notes.LoginActivity.RegistrationFragment;
-
 public class Singleton {
 
 	List<Note> notesList = new ArrayList<Note>();
@@ -38,12 +36,11 @@ public class Singleton {
 				} else {
 					throw new LoginException(LoginException.Result.WRONG_PASSWORD);
 				}
-			} else {
-				throw new LoginException(LoginException.Result.USER_NOT_FOUND);
 			}
-
 		}
-	}
+        throw new LoginException(LoginException.Result.USER_NOT_FOUND);
+
+    }
 
 	public void register(String name, String pass) throws RegistrationException{
 		for(User user : usersList){
