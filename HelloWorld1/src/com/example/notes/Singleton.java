@@ -1,6 +1,7 @@
 package com.example.notes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Singleton {
@@ -11,8 +12,16 @@ public class Singleton {
 
 	}
 
+    // NOTE METHODS HERE!!!
+
+    public void deleteNote(String title){
+
+    }
+
 	private static Singleton sInstance;
 
+    public HashMap<String, String> bufferNotes;
+    public ArrayList<HashMap<String, String>> transferNotes;
 	public static Singleton getInstance() {
 
 		if (sInstance == null)
@@ -23,6 +32,23 @@ public class Singleton {
 	public void init() {
 		notesList.add(new Note("Note1", "Hello first note!!! BLABLA"));
 	}
+
+    public List<Note> getNotes(){
+        return notesList;
+    }
+
+
+    public ArrayList<HashMap<String, String>> getNotesList()
+    {   transferNotes=new ArrayList<HashMap<String, String>>();
+        for(Note n:notesList){
+            bufferNotes=new HashMap<String, String>();
+            bufferNotes.put("Title",n.getTitle());
+            bufferNotes.put("Description",n.getContent());
+            transferNotes.add(bufferNotes);
+        }
+
+        return transferNotes;
+    }
 
 	ArrayList<User> usersList = new ArrayList<User>();
 	

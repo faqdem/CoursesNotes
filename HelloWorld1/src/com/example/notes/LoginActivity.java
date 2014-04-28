@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.helloworld1.R;
 import com.example.notes.Singleton.LoginException;
+import notes.NotesActivity;
 
 public class LoginActivity extends Activity implements TabListener {
 
