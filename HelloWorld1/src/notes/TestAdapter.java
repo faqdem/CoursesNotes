@@ -49,6 +49,10 @@ public class TestAdapter extends BaseAdapter {
         return null;
     }
 
+    @Override
+    public boolean isEnabled(int position) {
+        return true;
+    }
 
     public static class Holder {
         public TextView tvTitle;

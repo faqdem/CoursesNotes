@@ -11,4 +11,5 @@ public class NotesApplication extends Application{
 		Singleton.getInstance().init();
 	}
 
+
 }

@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Singleton {
 
+    public static final String DEMO_USER = "Stas";
+    public static final String DEMO_PASSWORD = "1234";
+
 	List<Note> notesList = new ArrayList<Note>();
 
 	private Singleton() {
@@ -31,7 +34,15 @@ public class Singleton {
 
 	public void init() {
 		notesList.add(new Note("Note1", "Hello first note!!! BLABLA"));
-	}
+        notesList.add(new Note("Note2", "Hello sec note!!!"));
+        notesList.add(new Note("Note3", "Hello third note!!!"));
+
+        try {
+            register(DEMO_USER,DEMO_PASSWORD);
+        } catch (RegistrationException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<Note> getNotes(){
         return notesList;

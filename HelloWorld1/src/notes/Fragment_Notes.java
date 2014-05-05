@@ -2,9 +2,11 @@ package notes;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.example.helloworld1.R;
@@ -36,9 +38,17 @@ public class Fragment_Notes extends Fragment{
                 new String[] { TITLE, DESCRIPTION }, new int[] { R.id.textViewTitle,
                 R.id.textViewContent });
         listView.setAdapter(listViewAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.i("List listener", "Hello");
+            }
+        });
 
         return v;
     }
+
+
 
 
 
