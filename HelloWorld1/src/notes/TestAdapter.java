@@ -1,6 +1,5 @@
 package notes;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,7 +14,7 @@ import com.example.notes.Singleton;
  */
 public class TestAdapter extends BaseAdapter {
 
-    private Context mContext;
+
 
     @Override
     public int getCount() {
@@ -35,7 +34,7 @@ public class TestAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null) {
-            view = View.inflate(mContext, R.layout.list_item, viewGroup);
+            view = View.inflate(viewGroup.getContext(), R.layout.list_item,null);
         }
         Holder holder = (Holder)view.getTag();
         if(holder == null) {
@@ -46,7 +45,7 @@ public class TestAdapter extends BaseAdapter {
             view.setTag(holder);
         }
         holder.tvTitle.setText(getItem(i).getTitle());
-        return null;
+        return view;
     }
 
     @Override

@@ -6,7 +6,6 @@ import android.app.ActionBar.TabListener;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
@@ -15,10 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.helloworld1.R;
-import com.example.notes.Singleton.LoginException;
-import notes.NotesActivity;
+import com.example.notes.async.Fragment_GetData;
+import com.example.notes.async.ILoading;
 
 public class LoginActivity extends Activity implements TabListener {
+
+
 
     @Override
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
@@ -82,6 +83,12 @@ public class LoginActivity extends Activity implements TabListener {
                 .setTabListener(this);
         bar.addTab(tab);
 
+        if (savedInstanceState == null) {
+
+            getFragmentManager().beginTransaction().
+                    add(new Fragment_GetData(), "Data fragment!")
+                    .commit();
+        }
 		/*if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new LoginFragment()).commit();
@@ -113,9 +120,23 @@ public class LoginActivity extends Activity implements TabListener {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class LoginFragment extends Fragment implements OnClickListener {
+    public static class LoginFragment extends Fragment implements OnClickListener,ILoading {
 
         public String login;
+        Fragment_GetData dataFragment;
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            dataFragment = (Fragment_GetData)getFragmentManager().findFragmentByTag("Data fragment!");
+            dataFragment.setLoadingInterface(this);
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            dataFragment.setLoadingInterface(this);
+        }
 
         @Override
         public void onResume() {
@@ -143,25 +164,30 @@ public class LoginActivity extends Activity implements TabListener {
 
 
         private void handleLogin(String login, String password) {
-            try {
+            /*try {
                 Singleton.getInstance().login(login, password);
             } catch (LoginException e) {
                 // TODO Auto-generated catch block
                 Toast.makeText(getActivity(), e.getResult().toString(), Toast.LENGTH_SHORT).show();
                 return;
-            }
-            startActivity(new Intent(getActivity(), NotesActivity.class));
+            }*/
+
+            dataFragment.login(login,password,this);
+//            startActivity(new Intent(getActivity(), NotesActivity.class));
 
         }
+
+        Button button1;
+        Button demoButt;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container,
                     false);
-            Button button1 = (Button) rootView.findViewById(R.id.login_button);
+            button1 = (Button) rootView.findViewById(R.id.login_button);
             button1.setOnClickListener(this);
-            Button demoButt = (Button) rootView.findViewById(R.id.demo_button);
+            demoButt = (Button) rootView.findViewById(R.id.demo_button);
             demoButt.setOnClickListener(this);
             return rootView;
         }
@@ -181,6 +207,12 @@ public class LoginActivity extends Activity implements TabListener {
 
 
             }
+        }
+
+        @Override
+        public void setViewIsLoading(boolean lock) {
+            button1.setEnabled(lock);
+            demoButt.setEnabled(lock);
         }
     }
 

@@ -11,7 +11,7 @@
     <string name="hint_passwordrep">Password again</string>
     <string name="button_login">Login</string>
     <string name="button_registration">Register</string>
-    <string name="title_activity_notes">NotesActivity</string>
+    <string name="title_activity_notes">Notes</string>
     <string name="label_registration">Registration of new user:</string>
     <string name="lable_reppassword">Repeat password:</string>
     <string name="hint_oldpassword">Old password</string>
@@ -22,5 +22,8 @@
     <string name="tab_login">Login</string>
     <string name="tab_registration">Registration</string>
     <string name="demo_butt">Demo</string>
+    <string name="add_note">Add note</string>
+    <string name="new_note">New note</string>
+    <string name="submitnote_button">Add</string>
 
 </resources>

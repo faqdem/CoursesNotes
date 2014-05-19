@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import com.example.helloworld1.R;
-import com.example.notes.Singleton;
 
 /**
  * Created by student on 4/28/14.
@@ -21,6 +19,7 @@ public class Fragment_Notes extends Fragment{
 
      ListView listView;
 
+    TestAdapter listViewAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_notes,null);
@@ -33,10 +32,7 @@ public class Fragment_Notes extends Fragment{
 
 
 
-        SimpleAdapter listViewAdapter = new SimpleAdapter(getActivity(),
-                Singleton.getInstance().getNotesList(), R.layout.list_item,
-                new String[] { TITLE, DESCRIPTION }, new int[] { R.id.textViewTitle,
-                R.id.textViewContent });
+        listViewAdapter = new TestAdapter();
         listView.setAdapter(listViewAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -48,8 +44,11 @@ public class Fragment_Notes extends Fragment{
         return v;
     }
 
-
-
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+//        Log.i("adapter count:",String.valueOf(listViewAdapter.getCount()));
+//        Log.i("List count:", String.valueOf(Singleton.getInstance().getNotesList().size()));
+        listViewAdapter.notifyDataSetChanged();
+    }
 }

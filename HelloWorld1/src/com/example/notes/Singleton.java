@@ -49,6 +49,12 @@ public class Singleton {
     }
 
 
+    public void addNote(Note n){
+
+        this.notesList.add(n);
+
+    }
+
     public ArrayList<HashMap<String, String>> getNotesList()
     {   transferNotes=new ArrayList<HashMap<String, String>>();
         for(Note n:notesList){
@@ -66,7 +72,12 @@ public class Singleton {
 	
 
 	public void login(String name, String pass) throws LoginException {
-		for (User user : usersList) {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (User user : usersList) {
 			if (user.getName().equals(name)) {
 				if (user.getPassword().equals(pass)) {
 					return;

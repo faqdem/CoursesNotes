@@ -1,6 +1,7 @@
 package notes;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +24,7 @@ public class NotesActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.notes, menu);
+		getMenuInflater().inflate(R.menu.add_note, menu);
 		return true;
 	}
 
@@ -33,9 +34,16 @@ public class NotesActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
+//		if (id == R.id.action_add_note) {
+//			return true;
+//		}
+        switch (id)
+        {
+            case R.id.action_add_note:
+                startActivity(new Intent(this, NewNoteActivity.class));
+                return true;
+        }
+
 		return super.onOptionsItemSelected(item);
 	}
 
